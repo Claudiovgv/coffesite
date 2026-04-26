@@ -1,0 +1,84 @@
+# ================================================
+# Atlantic Crown Coffee — .htaccess
+# Apache security, performance, and HTTPS config
+# ================================================
+
+# --- Redirect HTTP to HTTPS ---
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- Remove www (canonical) ---
+# Uncomment if your domain is without www:
+# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+# RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# --- Security Headers ---
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    # Prevent MIME sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    # XSS protection (legacy browsers)
+    Header always set X-XSS-Protection "1; mode=block"
+    # Control referrer information
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    # Disable browser features not needed
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none';"
+    # HSTS — tell browsers to always use HTTPS (enable after confirming HTTPS works)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    # Remove server signature
+    Header always unset X-Powered-By
+    Header always unset Server
+</IfModule>
+
+# --- Disable directory listing ---
+Options -Indexes
+
+# --- Block access to hidden and sensitive files ---
+<FilesMatch "(^\.htaccess|^\.htpasswd|^\.env|^\.git|^\.gitignore|^\.DS_Store|\.log$|\.zip$|\.tar\.gz$|\.sql$)">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# --- Block direct access to internal directories ---
+<IfModule mod_rewrite.c>
+    RewriteRule ^(\.git|docs|Fonts|Logo)(/|$) - [F,L]
+</IfModule>
+
+# --- Block common attack patterns (SQL injection, XSS probes) ---
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} (union|select|insert|drop|delete|update|cast|exec|declare|script|eval).*= [NC,OR]
+    RewriteCond %{QUERY_STRING} (\.\./|\.\.\\|%2e%2e%2f|%2e%2e/) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# --- Block bad bots and scanners ---
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (nikto|sqlmap|masscan|nmap|zgrab|dirbuster|gobuster|nuclei|wfuzz) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# --- Enable Gzip compression ---
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Browser caching for static assets ---
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/png  "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg  "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/css               "access plus 3 months"
+    ExpiresByType application/javascript "access plus 3 months"
+    ExpiresByType text/html              "access plus 1 day"
+</IfModule>
+
+# --- Custom error pages (optional — create these files if needed) ---
+# ErrorDocument 403 /403.html
+# ErrorDocument 404 /404.html

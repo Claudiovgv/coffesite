@@ -308,6 +308,15 @@ a  { text-decoration: none; color: inherit; }
   margin-bottom: 2.4rem;
 }
 
+.hero-brand-symbol {
+  display: block;
+  width: clamp(36px, 8vw, 60px);
+  height: auto;
+  margin: 0 auto 0.8rem;
+  opacity: 0.88;
+  filter: drop-shadow(0 0 8px rgba(201,168,76,0.35));
+}
+
 .hero-brand-name {
   display: block;
   font-family: var(--brand);
