@@ -3,7 +3,7 @@
    ========================================================= */
 
 // ----- i18n state -----
-let currentLang = 'pt';
+let currentLang = 'en';
 
 function setLanguage(lang) {
   if (!TRANSLATIONS[lang]) return;
@@ -45,13 +45,13 @@ function detectLanguage() {
   const saved = localStorage.getItem('lang');
   if (saved && TRANSLATIONS[saved]) return saved;
 
-  const langs = navigator.languages || [navigator.language || 'pt'];
+  const langs = navigator.languages || [navigator.language || 'en'];
   for (const l of langs) {
     const code = l.slice(0, 2).toLowerCase();
     if (TRANSLATIONS[code]) return code;
   }
 
-  return 'pt';
+  return 'en';
 }
 
 // ----- Navbar: scroll behaviour -----
