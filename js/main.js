@@ -70,18 +70,20 @@ window.addEventListener('scroll', () => {
 // Mobile menu toggle
 if (navToggle) {
   navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('open');
+    const isOpen = navToggle.classList.toggle('open');
     navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
   });
 }
-
-// Close mobile menu on link click
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navToggle.classList.remove('open');
-    navLinks.classList.remove('open');
-  });
-});
 
 // ----- Lang switcher -----
 const langBtn     = document.getElementById('langBtn');
@@ -165,8 +167,11 @@ if (contactForm) {
       return;
     }
 
+    const labelName    = t['contact.form.name.label'].replace(' *', '');
+    const labelPhone   = t['contact.form.phone.label'];
+    const labelSubject = t['contact.form.subject.label'];
     const body = encodeURIComponent(
-      `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone}\nAssunto: ${subject}\n\n${message}`
+      `${labelName}: ${name}\nEmail: ${email}\n${labelPhone}: ${phone}\n${labelSubject}: ${subject}\n\n${message}`
     );
     const mailSubject = encodeURIComponent(t['form.subject.default']);
 
