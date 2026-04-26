@@ -2,6 +2,58 @@
    Atlantic Crown Coffee — main.js
    ========================================================= */
 
+// ----- i18n state -----
+let currentLang = 'pt';
+
+function setLanguage(lang) {
+  if (!TRANSLATIONS[lang]) return;
+  currentLang = lang;
+
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const value = TRANSLATIONS[lang][key];
+    if (value !== undefined) el.innerHTML = value;
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    const value = TRANSLATIONS[lang][key];
+    if (value !== undefined) el.placeholder = value;
+  });
+
+  const langCurrent = document.querySelector('.lang-current');
+  if (langCurrent) langCurrent.textContent = lang.toUpperCase();
+
+  document.querySelectorAll('#langDropdown button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  const langBtn = document.getElementById('langBtn');
+  if (langBtn) langBtn.setAttribute('aria-label', `Language: ${lang.toUpperCase()}`);
+
+  // Toggle legal page language sections
+  document.querySelectorAll('.legal-lang').forEach(el => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+
+  localStorage.setItem('lang', lang);
+}
+
+function detectLanguage() {
+  const saved = localStorage.getItem('lang');
+  if (saved && TRANSLATIONS[saved]) return saved;
+
+  const langs = navigator.languages || [navigator.language || 'pt'];
+  for (const l of langs) {
+    const code = l.slice(0, 2).toLowerCase();
+    if (TRANSLATIONS[code]) return code;
+  }
+
+  return 'pt';
+}
+
 // ----- Navbar: scroll behaviour -----
 const navbar = document.querySelector('.navbar');
 const navToggle = document.querySelector('.nav-toggle');
@@ -31,6 +83,39 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 
+// ----- Lang switcher -----
+const langBtn     = document.getElementById('langBtn');
+const langDropdown = document.getElementById('langDropdown');
+
+if (langBtn && langDropdown) {
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = langDropdown.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  langDropdown.querySelectorAll('button[data-lang]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setLanguage(btn.dataset.lang);
+      langDropdown.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#langSwitcher')) {
+      langDropdown.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      langDropdown.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
 
 // ----- Hero: bg zoom on load -----
 const heroBg = document.querySelector('.hero-bg');
@@ -72,8 +157,10 @@ if (contactForm) {
     const subject = document.getElementById('subject').value.trim();
     const message = document.getElementById('message').value.trim();
 
+    const t = TRANSLATIONS[currentLang];
+
     if (!name || !email || !message) {
-      formMessage.textContent = 'Por favor preencha o nome, email e mensagem.';
+      formMessage.textContent = t['form.error'];
       formMessage.style.color = '#e07070';
       return;
     }
@@ -81,14 +168,30 @@ if (contactForm) {
     const body = encodeURIComponent(
       `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone}\nAssunto: ${subject}\n\n${message}`
     );
-    const mailSubject = encodeURIComponent(`Encomenda / Informação — Atlantic Crown Coffee`);
+    const mailSubject = encodeURIComponent(t['form.subject.default']);
 
-    // Replace the email below with the actual contact email
     window.location.href = `mailto:geral@atlanticcrowncoffee.com?subject=${mailSubject}&body=${body}`;
 
-    formMessage.textContent = 'A abrir o seu cliente de email...';
+    formMessage.textContent = t['form.opening'];
     formMessage.style.color = '#c9a84c';
 
     setTimeout(() => { formMessage.textContent = ''; }, 4000);
+  });
+}
+
+// ----- Init language -----
+setLanguage(detectLanguage());
+
+// ----- Privacy notice banner -----
+const privacyBanner = document.getElementById('privacyBanner');
+const privacyAccept = document.getElementById('privacyBannerAccept');
+
+if (privacyBanner && privacyAccept) {
+  if (!localStorage.getItem('privacy_notice_accepted')) {
+    privacyBanner.style.display = 'flex';
+  }
+  privacyAccept.addEventListener('click', () => {
+    localStorage.setItem('privacy_notice_accepted', '1');
+    privacyBanner.style.display = 'none';
   });
 }
