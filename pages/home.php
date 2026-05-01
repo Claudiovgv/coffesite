@@ -150,7 +150,6 @@
   <div class="contact-inner">
     <div class="contact-left reveal">
       <p class="section-label"><?= $t['contact.label'] ?></p>
-      <h2 class="section-title"><?= $t['contact.title'] ?></h2>
       <p class="contact-desc"><?= $t['contact.desc'] ?></p>
       <div class="contact-detail">
         <span class="detail-icon">&#9993;</span>

@@ -370,6 +370,11 @@ a    { text-decoration: none; color: inherit; }
 .legal-page p, .legal-page li { font-size: 0.9rem; color: var(--text-muted-dark); line-height: 1.8; margin-bottom: 0.75rem; }
 .legal-page ul { margin-left: 1.5rem; }
 .legal-page a { color: var(--gold); text-decoration: underline; }
+.legal-back { display: inline-block; margin-bottom: 2rem; font-size: 0.78rem; letter-spacing: 0.1em; color: var(--gold-dim); transition: color var(--transition); }
+.legal-back:hover { color: var(--gold); }
+.legal-header { margin-bottom: 2.5rem; }
+.legal-meta   { font-size: 0.78rem; color: var(--text-muted-dark); margin-bottom: 2rem; font-style: italic; }
+.legal-body   { max-width: 720px; }
 
 /* =========================================================
    RESPONSIVE

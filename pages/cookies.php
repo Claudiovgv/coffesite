@@ -1,6 +1,6 @@
 <main class="legal-page">
   <div class="container">
-    <a href="/<?php echo $lang; ?>" class="legal-back">← <?php echo htmlspecialchars($t['footer.nav.home'] ?? 'Home'); ?></a>
+    <a href="/<?php echo $lang; ?>/" class="legal-back">← <?php echo htmlspecialchars($t['footer.nav.home'] ?? 'Home'); ?></a>
 
     <?php if ($lang === 'en'): ?>
     <header class="legal-header">

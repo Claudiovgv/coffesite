@@ -18,9 +18,10 @@ if ($lang === '') {
 /* ---- Validate lang ---- */
 if (!in_array($lang, SUPPORTED_LANGS, true)) {
     http_response_code(404);
-    $lang = DEFAULT_LANG;
-    $page = 'home';
-    $t    = require __DIR__ . '/lang/' . $lang . '.php';
+    $lang     = DEFAULT_LANG;
+    $page     = 'home';
+    $t        = require __DIR__ . '/lang/' . $lang . '.php';
+    $ogLocale = OG_LOCALE[$lang] ?? 'en_US';
     include __DIR__ . '/includes/head.php';
     include __DIR__ . '/includes/navbar.php';
     echo '<main style="min-height:60vh;display:flex;align-items:center;justify-content:center;">';
@@ -43,8 +44,9 @@ $page = $pageMap[$slug] ?? null;
 /* ---- 404 for unknown pages ---- */
 if ($page === null || !in_array($page, SUPPORTED_PAGES, true)) {
     http_response_code(404);
-    $page = 'home';
-    $t    = require __DIR__ . '/lang/' . $lang . '.php';
+    $page     = 'home';
+    $t        = require __DIR__ . '/lang/' . $lang . '.php';
+    $ogLocale = OG_LOCALE[$lang] ?? 'en_US';
     include __DIR__ . '/includes/head.php';
     include __DIR__ . '/includes/navbar.php';
     echo '<main style="min-height:60vh;display:flex;align-items:center;justify-content:center;">';
