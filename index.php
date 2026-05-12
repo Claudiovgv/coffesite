@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/maintenance.php';
 require_once __DIR__ . '/config/app.php';
 
 /* ---- Parse URL ---- */
