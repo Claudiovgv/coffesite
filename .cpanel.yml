@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/atlanticrowngrou/public_html/
+    - /bin/cp -R $REPOPATH/* $DEPLOYPATH
+    - /bin/cp $REPOPATH/.htaccess $DEPLOYPATH/.htaccess

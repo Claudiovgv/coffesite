@@ -17,7 +17,7 @@
     <a href="#contact" class="btn-gold"><?= $t['hero.cta'] ?></a>
   </div>
   <div class="hero-right">
-    <img src="/images/hero-cafe-interior.jpg" alt="Atlantic Crown Coffee — premium experience" />
+    <img src="/images/saco-cafe.jpg" alt="Atlantic Crown Coffee — premium experience" />
   </div>
 </section>
 
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="story-image">
-      <img src="/images/brand-story.jpg" alt="Portuguese maritime heritage" loading="lazy" />
+      <img src="/images/a-nossa-historia.png" alt="Portuguese navigators at sea" loading="lazy" />
     </div>
   </div>
 </section>
@@ -50,61 +50,71 @@
      ====================================================== -->
 <section class="coffees" id="coffees">
   <div class="coffees-inner">
-    <div class="coffees-left reveal">
+
+    <!-- imagem de fundo canto inferior direito -->
+    <div class="coffees-bg">
+      <img src="/images/cafe.png" alt="" aria-hidden="true" loading="lazy" />
+    </div>
+
+    <div class="coffees-content reveal">
       <p class="section-label"><?= $t['coffees.label'] ?></p>
       <h2 class="section-title"><?= $t['coffees.label'] ?></h2>
       <p class="coffees-subtitle"><?= $t['coffees.subtitle'] ?></p>
 
       <div class="origins-grid">
         <div class="origin-card">
-          <div class="origin-icon">&#127809;</div>
+          <span class="origin-region">Single Origin · South America</span>
+          <div class="origin-img">
+            <img src="/images/brazil.png" alt="Brazil" loading="lazy" />
+          </div>
           <p class="origin-name"><?= $t['coffees.brazil.name'] ?></p>
           <p class="origin-profile"><?= $t['coffees.brazil.profile'] ?></p>
           <p class="origin-desc"><?= $t['coffees.brazil.desc'] ?></p>
         </div>
         <div class="origin-card">
-          <div class="origin-icon">&#9749;</div>
+          <span class="origin-region">Single Origin · South America</span>
+          <div class="origin-img">
+            <img src="/images/colombia.png" alt="Colombia" loading="lazy" />
+          </div>
           <p class="origin-name"><?= $t['coffees.colombia.name'] ?></p>
           <p class="origin-profile"><?= $t['coffees.colombia.profile'] ?></p>
           <p class="origin-desc"><?= $t['coffees.colombia.desc'] ?></p>
         </div>
         <div class="origin-card">
-          <div class="origin-icon">&#127807;</div>
+          <span class="origin-region">Single Origin · East Africa</span>
+          <div class="origin-img">
+            <img src="/images/kenya-ethiopia.png" alt="Kenya / Ethiopia" loading="lazy" />
+          </div>
           <p class="origin-name"><?= $t['coffees.kenya.name'] ?></p>
           <p class="origin-profile"><?= $t['coffees.kenya.profile'] ?></p>
           <p class="origin-desc"><?= $t['coffees.kenya.desc'] ?></p>
         </div>
       </div>
-    </div>
 
-    <div class="coffees-right">
-      <div class="coffees-right-bg">
-        <img src="/images/product-premium-coffee-1000g.jpg" alt="" aria-hidden="true" loading="lazy" />
-      </div>
-      <div class="coffees-right-overlay"></div>
       <div class="badges-grid reveal" data-delay="150">
         <div class="badge">
-          <div class="badge-icon">&#10022;</div>
+          <div class="badge-icon"><img src="/images/Icons/Dourado/3.png" alt="Premium Quality"></div>
           <p class="badge-title"><?= $t['badge.quality.title'] ?></p>
           <p class="badge-text"><?= $t['badge.quality.text'] ?></p>
         </div>
         <div class="badge">
-          <div class="badge-icon">&#9812;</div>
+          <div class="badge-icon"><img src="/images/Icons/Dourado/4.png" alt="Heritage"></div>
           <p class="badge-title"><?= $t['badge.heritage.title'] ?></p>
           <p class="badge-text"><?= $t['badge.heritage.text'] ?></p>
         </div>
         <div class="badge">
-          <div class="badge-icon">&#9706;</div>
+          <div class="badge-icon"><img src="/images/Icons/Dourado/1.png" alt="Elegant Packaging"></div>
           <p class="badge-title"><?= $t['badge.packaging.title'] ?></p>
           <p class="badge-text"><?= $t['badge.packaging.text'] ?></p>
         </div>
         <div class="badge">
-          <div class="badge-icon">&#127963;</div>
+          <div class="badge-icon"><img src="/images/Icons/Dourado/2.png" alt="Hospitality"></div>
           <p class="badge-title"><?= $t['badge.hospitality.title'] ?></p>
           <p class="badge-text"><?= $t['badge.hospitality.text'] ?></p>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -119,22 +129,22 @@
     </header>
     <div class="why-grid">
       <div class="why-card reveal" data-delay="0">
-        <div class="why-icon">&#9670;</div>
+        <div class="why-icon"><img src="/images/Icons/Dourado/4.png" alt="A Unique Brand"></div>
         <p class="why-title"><?= $t['why.brand.title'] ?></p>
         <p class="why-text"><?= $t['why.brand.text'] ?></p>
       </div>
       <div class="why-card reveal" data-delay="80">
-        <div class="why-icon">&#9650;</div>
+        <div class="why-icon"><img src="/images/Icons/Dourado/1.png" alt="Growth Opportunity"></div>
         <p class="why-title"><?= $t['why.growth.title'] ?></p>
         <p class="why-text"><?= $t['why.growth.text'] ?></p>
       </div>
       <div class="why-card reveal" data-delay="160">
-        <div class="why-icon">&#10022;</div>
+        <div class="why-icon"><img src="/images/Icons/Dourado/3.png" alt="Consistent Quality"></div>
         <p class="why-title"><?= $t['why.quality.title'] ?></p>
         <p class="why-text"><?= $t['why.quality.text'] ?></p>
       </div>
       <div class="why-card reveal" data-delay="240">
-        <div class="why-icon">&#9812;</div>
+        <div class="why-icon"><img src="/images/Icons/Dourado/2.png" alt="Built for Premium Markets"></div>
         <p class="why-title"><?= $t['why.premium.title'] ?></p>
         <p class="why-text"><?= $t['why.premium.text'] ?></p>
       </div>

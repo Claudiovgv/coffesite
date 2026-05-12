@@ -10,7 +10,14 @@ $homeUrl    = '/' . $lang . '/';
 
   <div class="nav-end">
     <ul class="nav-links">
-      <li><a href="<?= $homeUrl ?>#coffees"><?= $t['nav.products'] ?></a></li>
+      <li class="nav-item-dropdown">
+        <a href="<?= $homeUrl ?>#coffees" class="nav-dropdown-trigger"><?= $t['nav.products'] ?> <span class="nav-arrow">&#9656;</span></a>
+        <ul class="nav-dropdown">
+          <li><a href="/<?= $lang ?>/products/brazil">Brazil</a></li>
+          <li><a href="/<?= $lang ?>/products/colombia">Colombia</a></li>
+          <li><a href="/<?= $lang ?>/products/kenya-ethiopia">Kenya / Ethiopia</a></li>
+        </ul>
+      </li>
       <li><a href="<?= $homeUrl ?>#story"><?= $t['nav.story'] ?></a></li>
       <li><a href="<?= $homeUrl ?>#contact"><?= $t['nav.contact'] ?></a></li>
     </ul>

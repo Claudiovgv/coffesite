@@ -97,6 +97,63 @@ if (contactForm && typeof FORM_STRINGS !== 'undefined') {
   });
 }
 
+// ----- Order form (product pages) -----
+const orderForm    = document.getElementById('orderForm');
+const orderMessage = document.getElementById('orderMessage');
+
+if (orderForm && typeof ORDER_STRINGS !== 'undefined') {
+  orderForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name  = document.getElementById('o-name').value.trim();
+    const email = document.getElementById('o-email').value.trim();
+    const qty   = document.getElementById('o-qty').value.trim();
+
+    if (!name || !email || !qty) {
+      orderMessage.textContent = ORDER_STRINGS.error;
+      orderMessage.style.color = '#e07070';
+      return;
+    }
+
+    const submitBtn = orderForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = ORDER_STRINGS.sending;
+
+    try {
+      const formData = new FormData(orderForm);
+      const response = await fetch('/send.php', { method: 'POST', body: formData });
+      const result   = await response.json();
+
+      if (result.success) {
+        orderMessage.textContent = ORDER_STRINGS.success;
+        orderMessage.style.color = '#c9a84c';
+        orderForm.reset();
+      } else {
+        orderMessage.textContent = result.message || ORDER_STRINGS.error;
+        orderMessage.style.color = '#e07070';
+      }
+    } catch {
+      orderMessage.textContent = ORDER_STRINGS.error;
+      orderMessage.style.color = '#e07070';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitBtn.dataset.submitLabel;
+      setTimeout(() => { orderMessage.textContent = ''; }, 6000);
+    }
+  });
+}
+
+// ----- Nav dropdown (mobile toggle) -----
+document.querySelectorAll('.nav-item-dropdown').forEach(item => {
+  const trigger = item.querySelector('.nav-dropdown-trigger');
+  trigger.addEventListener('click', function (e) {
+    const isMobile = window.innerWidth <= 768;
+    if (!isMobile) return;
+    e.preventDefault();
+    item.classList.toggle('open');
+  });
+});
+
 // ----- Privacy banner -----
 const privacyBanner = document.getElementById('privacyBanner');
 const privacyAccept = document.getElementById('privacyBannerAccept');

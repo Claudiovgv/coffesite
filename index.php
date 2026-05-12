@@ -39,7 +39,17 @@ $pageMap = [
     'cookies'  => 'cookies',
 ];
 
-$page = $pageMap[$slug] ?? null;
+$productSlug = null;
+$page        = $pageMap[$slug] ?? null;
+
+/* ---- Product pages: /en/products/{slug} ---- */
+if ($page === null && preg_match('#^products/([a-z0-9-]+)$#', $slug, $m)) {
+    $products = require __DIR__ . '/config/products.php';
+    if (isset($products[$m[1]])) {
+        $page        = 'product';
+        $productSlug = $m[1];
+    }
+}
 
 /* ---- 404 for unknown pages ---- */
 if ($page === null || !in_array($page, SUPPORTED_PAGES, true)) {

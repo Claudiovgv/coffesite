@@ -45,6 +45,11 @@
     success: <?= json_encode($t['form.success']) ?>,
     sending: <?= json_encode($t['form.sending']) ?>
   };
+  const ORDER_STRINGS = {
+    error:   <?= json_encode($t['form.order.error']) ?>,
+    success: <?= json_encode($t['form.order.success']) ?>,
+    sending: <?= json_encode($t['form.order.sending']) ?>
+  };
   const CURRENT_LANG = <?= json_encode($lang) ?>;
 </script>
 <script src="/js/main.js" defer></script>
