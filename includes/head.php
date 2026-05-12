@@ -24,7 +24,7 @@
   <meta property="og:url"         content="<?= SITE_URL ?>/<?= $lang ?>/<?= $page !== 'home' ? $page : '' ?>" />
   <meta property="og:title"       content="<?= htmlspecialchars($t['meta.' . $page . '.title']) ?>" />
   <meta property="og:description" content="<?= htmlspecialchars($t['meta.' . $page . '.description']) ?>" />
-  <meta property="og:image"       content="<?= SITE_URL ?>/images/hero-cafe-interior.jpg" />
+  <meta property="og:image"       content="<?= SITE_URL ?>/images/hero-cafe-interior.webp" />
   <meta property="og:locale"      content="<?= htmlspecialchars($ogLocale) ?>" />
   <meta property="og:site_name"   content="Atlantic Crown Coffee" />
 
@@ -32,7 +32,7 @@
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="<?= htmlspecialchars($t['meta.' . $page . '.title']) ?>" />
   <meta name="twitter:description" content="<?= htmlspecialchars($t['meta.' . $page . '.description']) ?>" />
-  <meta name="twitter:image"       content="<?= SITE_URL ?>/images/hero-cafe-interior.jpg" />
+  <meta name="twitter:image"       content="<?= SITE_URL ?>/images/hero-cafe-interior.webp" />
 
   <!-- Favicon -->
   <link rel="icon"             type="image/png" sizes="32x32" href="/images/favicon_browser-logo.png" />

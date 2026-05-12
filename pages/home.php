@@ -6,7 +6,7 @@
 <section class="hero" id="inicio">
   <div class="hero-left reveal">
     <div class="hero-brand-row">
-      <img src="/images/apenas-simbolo.png" alt="" class="hero-brand-logo" aria-hidden="true" />
+      <img src="/images/apenas-simbolo.webp" alt="" class="hero-brand-logo" aria-hidden="true" />
       <div class="hero-brand-text">
         <span class="hero-brand-name">Atlantic Crown</span>
         <span class="hero-brand-sub">— Coffee —</span>
@@ -17,7 +17,7 @@
     <a href="#contact" class="btn-gold"><?= $t['hero.cta'] ?></a>
   </div>
   <div class="hero-right">
-    <img src="/images/saco-cafe.jpg" alt="Atlantic Crown Coffee — premium experience" />
+    <img src="/images/saco-cafe.webp" alt="Atlantic Crown Coffee — premium experience" />
   </div>
 </section>
 
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="story-image">
-      <img src="/images/a-nossa-historia.png" alt="Portuguese navigators at sea" loading="lazy" />
+      <img src="/images/a-nossa-historia.webp" alt="Portuguese navigators at sea" loading="lazy" />
     </div>
   </div>
 </section>
@@ -53,7 +53,7 @@
 
     <!-- imagem de fundo canto inferior direito -->
     <div class="coffees-bg">
-      <img src="/images/cafe.png" alt="" aria-hidden="true" loading="lazy" />
+      <img src="/images/cafe.webp" alt="" aria-hidden="true" loading="lazy" />
     </div>
 
     <div class="coffees-content reveal">
@@ -65,7 +65,7 @@
         <div class="origin-card">
           <span class="origin-region">Single Origin · South America</span>
           <div class="origin-img">
-            <img src="/images/brazil.png" alt="Brazil" loading="lazy" />
+            <img src="/images/brazil.webp" alt="Brazil" loading="lazy" />
           </div>
           <p class="origin-name"><?= $t['coffees.brazil.name'] ?></p>
           <p class="origin-profile"><?= $t['coffees.brazil.profile'] ?></p>
@@ -74,7 +74,7 @@
         <div class="origin-card">
           <span class="origin-region">Single Origin · South America</span>
           <div class="origin-img">
-            <img src="/images/colombia.png" alt="Colombia" loading="lazy" />
+            <img src="/images/colombia.webp" alt="Colombia" loading="lazy" />
           </div>
           <p class="origin-name"><?= $t['coffees.colombia.name'] ?></p>
           <p class="origin-profile"><?= $t['coffees.colombia.profile'] ?></p>
@@ -83,7 +83,7 @@
         <div class="origin-card">
           <span class="origin-region">Single Origin · East Africa</span>
           <div class="origin-img">
-            <img src="/images/kenya-ethiopia.png" alt="Kenya / Ethiopia" loading="lazy" />
+            <img src="/images/kenya-ethiopia.webp" alt="Kenya / Ethiopia" loading="lazy" />
           </div>
           <p class="origin-name"><?= $t['coffees.kenya.name'] ?></p>
           <p class="origin-profile"><?= $t['coffees.kenya.profile'] ?></p>
