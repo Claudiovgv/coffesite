@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - echo "Deployed"
+    - /usr/bin/rsync -r --exclude='.git' --exclude='.cpanel.yml' $REPOPATH/ /home/atlanticrowngrou/public_html/
