@@ -9,7 +9,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['maint_user'])) {
     if ($_POST['maint_user'] === 'admin' && $_POST['maint_pass'] === 'adminAC') {
         $_SESSION['maint_access'] = true;
-        header('Location: ' . strtok($_SERVER['REQUEST_URI'], '?'));
+        header('Location: /');
         exit;
     }
     $error = true;
