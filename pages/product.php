@@ -92,6 +92,8 @@ $desc     = $t['coffees.' . $tk . '.desc'];
 
     <div class="product-order-right reveal" data-delay="100">
       <form class="order-form" id="orderForm" novalidate>
+        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>" />
+        <input type="text" name="website" value="" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off" />
         <input type="hidden" name="type"   value="order" />
         <input type="hidden" name="coffee" value="<?= htmlspecialchars($name) ?>" />
 

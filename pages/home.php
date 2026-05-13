@@ -178,6 +178,8 @@
     <div class="contact-right reveal" data-delay="100">
       <h2 class="section-title"><?= $t['contact.title'] ?></h2>
       <form class="contact-form" id="contactForm" novalidate>
+        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>" />
+        <input type="text" name="website" value="" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off" />
         <div class="form-row">
           <div class="form-group">
             <label for="name"><?= $t['contact.form.name.label'] ?></label>

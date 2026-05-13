@@ -4,7 +4,7 @@ define('MAINTENANCE_MODE', true);
 
 if (!MAINTENANCE_MODE) return;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['maint_user'])) {
     if ($_POST['maint_user'] === 'admin' && $_POST['maint_pass'] === 'adminAC') {

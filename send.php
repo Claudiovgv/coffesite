@@ -7,10 +7,34 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+if (session_status() === PHP_SESSION_NONE) session_start();
+
 // --- Only accept POST ---
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method not allowed.']);
+    exit;
+}
+
+// --- Honeypot: bots fill this, humans don't ---
+if (!empty($_POST['website'])) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Spam detected.']);
+    exit;
+}
+
+// --- CSRF token ---
+if (empty($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'] ?? '', $_POST['csrf_token'])) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Invalid request. Please refresh the page and try again.']);
+    exit;
+}
+
+// --- Rate limit: max 3 submissions per session ---
+$_SESSION['submit_count'] = ($_SESSION['submit_count'] ?? 0) + 1;
+if ($_SESSION['submit_count'] > 3) {
+    http_response_code(429);
+    echo json_encode(['success' => false, 'message' => 'Too many requests. Please try again later.']);
     exit;
 }
 
