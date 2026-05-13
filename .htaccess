@@ -46,8 +46,25 @@ RewriteRule ^(.*)$ index.php [QSA,L]
 # ---- Cache static assets ----
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/jpeg "access plus 1 month"
-  ExpiresByType image/png  "access plus 1 month"
-  ExpiresByType text/css   "access plus 1 week"
-  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType image/webp  "access plus 3 months"
+  ExpiresByType image/jpeg  "access plus 3 months"
+  ExpiresByType image/png   "access plus 3 months"
+  ExpiresByType image/svg+xml "access plus 3 months"
+  ExpiresByType text/css    "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType font/ttf    "access plus 6 months"
+  ExpiresByType font/woff2  "access plus 6 months"
+</IfModule>
+
+# ---- Cache-Control headers ----
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|jpg|jpeg|png|svg)$">
+    Header set Cache-Control "public, max-age=7776000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(ttf|woff|woff2)$">
+    Header set Cache-Control "public, max-age=15552000, immutable"
+  </FilesMatch>
 </IfModule>
